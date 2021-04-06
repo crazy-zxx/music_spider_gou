@@ -73,15 +73,15 @@ def music_search():
 # 格式化输出搜索到的歌曲信息
 def music_show(result):
     if len(result) > 0:
-        print('序号\t歌名\t\t\t\t\t\t\t\t专辑\t\t\t\t\t\t歌手\t\t\t时长')
+        print('序号\t歌名\t\t\t\t\t\t\t\t\t\t\t专辑\t\t\t\t\t\t\t\t\t\t\t歌手\t\t\t\t\t时长')
         i = 0  # 计数
         for r in result:
             i += 1
             # 获取指定长度且末尾补齐空格的字符串
             mid = align_print.align_string(str(i), 4)
-            name = align_print.align_string(r['name'], 60)
+            name = align_print.align_string(r['name'], 50)
             album = align_print.align_string(r['album'], 50)
-            artist = align_print.align_string(r['artist'], 30)
+            artist = align_print.align_string(r['artist'], 20)
             song_time_minutes = align_print.align_string(r['songTimeMinutes'], 10)
             print(mid + ' ' + name + ' ' + album + ' ' + artist + ' ' + song_time_minutes)
 
@@ -124,7 +124,6 @@ def music_download(result):
             print(str(index) + ' 下载完成！')
 
     except ValueError as e:
-        print(e)
         print('无效输入！')
         music_download(result)
 
