@@ -5,54 +5,12 @@
 
 __author__ = 'xylx'
 
+import align_print
 import requests
 import json
 import time
 import re
 import execjs
-
-
-# 获取字符串字节数
-def get_str_width(string):
-    widths = [
-        (126, 1), (159, 0), (687, 1), (710, 0), (711, 1),
-        (727, 0), (733, 1), (879, 0), (1154, 1), (1161, 0),
-        (4347, 1), (4447, 2), (7467, 1), (7521, 0), (8369, 1),
-        (8426, 0), (9000, 1), (9002, 2), (11021, 1), (12350, 2),
-        (12351, 1), (12438, 2), (12442, 0), (19893, 2), (19967, 1),
-        (55203, 2), (63743, 1), (64106, 2), (65039, 1), (65059, 0),
-        (65131, 2), (65279, 1), (65376, 2), (65500, 1), (65510, 2),
-        (120831, 1), (262141, 2), (1114109, 1),
-    ]
-    width = 0
-    for each in string:
-        if ord(each) == 0xe or ord(each) == 0xf:
-            continue
-        elif ord(each) <= 1114109:
-            for num, wid in widths:
-                if ord(each) <= num:
-                    each_width = wid
-                    width += each_width
-                    break
-            continue
-
-        else:
-            each_width = 1
-        width += each_width
-
-    if string.encode('UTF-8').isalpha():
-        width = width + 1
-
-    return width
-
-
-# 字符串按指定宽度对齐
-def align_string(string, width):
-    string_width = get_str_width(string)
-    if width > string_width:
-        return string + ' ' * (width - string_width)
-    else:
-        return string
 
 
 headers = {
@@ -120,11 +78,11 @@ def music_show(result):
         for r in result:
             i += 1
             # 获取指定长度且末尾补齐空格的字符串
-            mid = align_string(str(i), 4)
-            name = align_string(r['name'], 60)
-            album = align_string(r['album'], 50)
-            artist = align_string(r['artist'], 30)
-            song_time_minutes = align_string(r['songTimeMinutes'], 10)
+            mid = align_print.align_string(str(i), 4)
+            name = align_print.align_string(r['name'], 60)
+            album = align_print.align_string(r['album'], 50)
+            artist = align_print.align_string(r['artist'], 30)
+            song_time_minutes = align_print.align_string(r['songTimeMinutes'], 10)
             print(mid + ' ' + name + ' ' + album + ' ' + artist + ' ' + song_time_minutes)
 
         music_download(result)
