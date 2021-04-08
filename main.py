@@ -78,11 +78,11 @@ def music_show(result):
         for r in result:
             i += 1
             # 获取指定长度且末尾补齐空格的字符串
-            mid = align_print.align_string(str(i), 4)
-            name = align_print.align_string(r['name'], 50)
-            album = align_print.align_string(r['album'], 50)
-            artist = align_print.align_string(r['artist'], 20)
-            song_time_minutes = align_print.align_string(r['songTimeMinutes'], 10)
+            mid = align_print.align_left_cut(str(i), 4)
+            name = align_print.align_left_cut(r['name'], 50)
+            album = align_print.align_left_cut(r['album'], 50)
+            artist = align_print.align_left_cut(r['artist'], 20)
+            song_time_minutes = align_print.align_left_cut(r['songTimeMinutes'], 10)
             print(mid + ' ' + name + ' ' + album + ' ' + artist + ' ' + song_time_minutes)
 
         music_download(result)
